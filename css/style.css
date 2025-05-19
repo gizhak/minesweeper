@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    padding: 20px;
+}
+
+body h1 {
+    text-align: center;
+    color: aliceblue;
+    margin: 0 auto;
+}
+
+
+.board-game {
+    background-color: rgb(169, 169, 172);
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+td.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+
+td.cell.revealed {
+    background-color: white;
+}
+
+td.cell.mine {
+    background-color: red;
+}
+
+#new-game {
+    margin: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#new-game:hover {
+    background-color: #45a049;
+}

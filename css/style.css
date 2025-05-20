@@ -10,6 +10,13 @@ body h1 {
     margin: 0 auto;
 }
 
+div h3 {
+    text-align: center;
+    color: aliceblue;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+}
 
 .board-game {
     background-color: rgb(169, 169, 172);

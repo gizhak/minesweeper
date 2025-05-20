@@ -11,6 +11,11 @@
 
 <body onload="onInit()">
     <h1>Minesweeper</h1>
+    <div class="levels">
+        <button onclick="setLevel('beginner')">Beginner</button>
+        <button onclick="setLevel('medium')">Medium</button>
+        <button onclick="setLevel('expert')">Expert</button>
+    </div>
     <div class="board-game">
         <button id="new-game" onclick="onRestart()">Restart</button>
     </div>

@@ -35,6 +35,21 @@ function onInit() {
 
 }
 
+function setLevel(level) {
+    if (level === 'beginner') {
+        gLevel.SIZE = 4
+        gLevel.MINES = 2
+    } else if (level === 'medium') {
+        gLevel.SIZE = 8
+        gLevel.MINES = 14
+    } else if (level === 'expert') {
+        gLevel.SIZE = 12
+        gLevel.MINES = 32
+    }
+
+    onInit()
+}
+
 function onRestart() {
     console.log('click on restart button')
 

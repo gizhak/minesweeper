@@ -18,6 +18,13 @@ div h3 {
     display: block;
 }
 
+.levels {
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
 .board-game {
     background-color: rgb(169, 169, 172);
     margin: 0 auto;

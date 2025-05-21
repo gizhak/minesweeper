@@ -5,6 +5,18 @@ console.log('ok main')
 var mins = '💣'
 var FLAG = '🚩'
 
+var SMILEY = '😊'
+var WIN_SMILEY = '😎'
+var LOSE_SMILEY = '😵'
+
+
+var elRestart = document.querySelector('.board-game button')
+
+
+var gTimerInterval
+var gSeconds
+
+
 var gBoard = {
     minesAroundCount: 4,
     isRevealed: false,
@@ -33,6 +45,14 @@ function onInit() {
 
     renderBoard(gBoard)
 
+    setSmiley()
+    minesCount()
+    resetTimer()
+    // startTimer()
+
+    // var elRestart = document.querySelector('.board-game button')
+    elRestart.style.display = 'none'
+
 }
 
 function setLevel(level) {
@@ -46,14 +66,22 @@ function setLevel(level) {
         gLevel.SIZE = 12
         gLevel.MINES = 32
     }
-
+    minesCount()
     onInit()
 }
 
 function onRestart() {
     console.log('click on restart button')
+    setSmiley()
+    stopTimer()
+    gTimerInterval = null
 
-    var elWinLose = document.querySelector('h3')
+    gGame.isOn = false
+    gGame.revealedCount = 0
+    gGame.markedCount = 0
+    gGame.secsPassed = 0
+
+    var elWinLose = document.querySelector('.winlose h3')
     elWinLose.style.display = 'none'
 
     onInit()
@@ -163,6 +191,12 @@ function renderBoard(board) {
 function onCellClicked(elCell, i, j) {
     console.log(elCell, i, j)
 
+    setSmiley()
+    if (gGame.isOn && !gTimerInterval) {
+        startTimer()
+        // setSmiley()
+    }
+
     if (!gGame.isOn || gBoard[i][j].isRevealed || gBoard[i][j].isMarked) return
 
     gBoard[i][j].isRevealed = true
@@ -203,7 +237,7 @@ function onCellMarked(elCell, i, j) {
         elCell.innerText = FLAG
         gGame.markedCount++
     }
-
+    minesCount()
     checkGameOver()
 
 }
@@ -215,31 +249,90 @@ function checkGameOver() {
     var nonMineCells = totalCells - totalMines // 16-2 = 14
 
     if (gGame.revealedCount === nonMineCells && gGame.markedCount === totalMines) {
+        console.log('gGame.revealedCount: ', gGame.revealedCount)
+        console.log('nonMineCells: ', nonMineCells)
+        console.log('gGame.markedCount: ', gGame.markedCount)
+        console.log('totalMines: ', totalMines)
         gameOver(true)
+    }
+
+
+
+}
+
+function minesCount() {
+    var elMines = document.querySelector('.mines h4')
+    console.log(elMines)
+
+    if (elMines) {
+        var leftMines = gLevel.MINES - gGame.markedCount
+        elMines.innerText = leftMines
     }
 
 }
 
+function startTimer() {
+    gSeconds = 0
+
+    var elTimer = document.querySelector('.time h4')
+    console.log(elTimer)
+    elTimer.innerText = '0s'
+
+    gTimerInterval = setInterval(function () {
+        gSeconds++
+        elTimer.innerHTML = gSeconds
+    }, 1000)
+
+}
+
+function stopTimer() {
+    clearInterval(gTimerInterval)
+    return gSeconds
+}
+
+function resetTimer() {
+    stopTimer()
+    gSeconds = 0
+    var elTimer = document.querySelector('.time h4')
+    console.log(elTimer)
+    elTimer.innerText = '0s'
+    // document.querySelector('.time h4').innerText = '0s'
+}
+
+function setSmiley() {
+    console.log('works')
+    var elStatus = document.querySelector('.status h2')
+    console.log(elStatus)
+    elStatus.innerText = SMILEY
+}
 
 function gameOver(isWin) {
     // console.log('GAME OVER')
+    stopTimer()
+    gTimerInterval = null
+
     gGame.isOn = false
 
-    var elWinLose = document.querySelector('h3')
+    var elWinLose = document.querySelector('.winlose h3')
     // console.log(elWinLose)
 
     if (isWin) {
         console.log('You found all Mines')
         elWinLose.innerText = 'YOU WIN'
         elWinLose.style.display = 'block'
-
+        elRestart.style.display = 'block'
+        document.querySelector('.status h2').innerText = WIN_SMILEY
 
     } else {
         console.log('GAME OVER')
+
         elWinLose.innerText = 'YOU LOSE'
         elWinLose.style.display = 'block'
-        revealAllMines()
+        elRestart.style.display = 'block'
+        document.querySelector('.status h2').innerText = LOSE_SMILEY
+        // revealAllMines()
     }
+    revealAllMines()
 
 }
 // TODO check the continue 
@@ -247,7 +340,7 @@ function expandReveal(board, elCell, rowIdx, colIdx) {
 
     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
 
-        if (i < 0 || i >= board.length) continue // check again ....
+        if (i < 0 || i >= board.length) continue // if the line out from board so continue
 
         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
 

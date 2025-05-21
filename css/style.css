@@ -18,6 +18,7 @@ div h3 {
     display: block;
 }
 
+
 .levels {
     margin: 0 auto;
     max-width: 400px;
@@ -25,12 +26,84 @@ div h3 {
     text-align: center;
 }
 
-.board-game {
-    background-color: rgb(169, 169, 172);
-    margin: 0 auto;
-    max-width: 400px;
-    padding: 20px;
+.game-status {
+    margin: 1px;
+    bottom: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.mines {
     text-align: center;
+    width: 50px;
+    height: 75px;
+    padding: 10px;
+    bottom: unset;
+    border: 2px;
+    /* border-style: solid; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.mines h4 {
+    text-align: center;
+    color: aliceblue;
+    /* margin: auto; */
+    padding: 1px;
+    margin-right: 100px;
+}
+
+
+.time {
+
+    text-align: center;
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    bottom: unset;
+    border: 2px;
+    border-style: solid;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.time h4 {
+    text-align: center;
+    color: aliceblue;
+    /* margin: auto; */
+    padding: 1px;
+    margin-right: 100px;
+}
+
+.status {
+    text-align: center;
+    width: 50px;
+    height: 75px;
+    padding: 10px;
+    bottom: unset;
+    border: 2px;
+    border-style: solid;
+
+}
+
+.status h2 {
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.board-game {
+    /* background-color: rgb(169, 169, 172); */
+    margin: 0 auto;
+    max-width: 100px;
+    padding: 10px;
+    text-align: center;
+    display: block;
 }
 
 table {

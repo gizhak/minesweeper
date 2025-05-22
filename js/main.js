@@ -12,9 +12,10 @@ var LOSE_SMILEY = '😵'
 
 var elRestart = document.querySelector('.board-game button')
 
-
+var gLives = 3
 var gTimerInterval
 var gSeconds
+var gMinesHit = 0
 
 
 var gBoard = {
@@ -45,8 +46,12 @@ function onInit() {
 
     renderBoard(gBoard)
 
+    gLives = 3
+    gMinesHit = 0
+
     setSmiley()
     minesCount()
+    livesCount()
     resetTimer()
     // startTimer()
 
@@ -80,6 +85,10 @@ function onRestart() {
     gGame.revealedCount = 0
     gGame.markedCount = 0
     gGame.secsPassed = 0
+    gLives = 3
+    gMinesHit = 0
+
+    gTimerInterval = null
 
     var elWinLose = document.querySelector('.winlose h3')
     elWinLose.style.display = 'none'
@@ -204,7 +213,18 @@ function onCellClicked(elCell, i, j) {
 
     if (gBoard[i][j].isMine) {
         elCell.innerHTML = mins
-        gameOver(false)
+        gMinesHit++
+        gLives--
+        livesCount()
+
+        if (gLives <= 0) {
+            console.log('gLives', gLives)
+            console.log('gLevel.MINES', gLevel.MINES)
+            gameOver(false)
+        } else if (gMinesHit >= gLevel.MINES) {
+            gameOver(false)
+        }
+
 
     } else {
         var minsCount = gBoard[i][j].minesAroundCount
@@ -248,6 +268,10 @@ function checkGameOver() {
     var totalMines = gLevel.MINES // 2
     var nonMineCells = totalCells - totalMines // 16-2 = 14
 
+    console.log('gGame.revealedCount: ', gGame.revealedCount)
+    console.log('nonMineCells: ', nonMineCells)
+    console.log('gGame.markedCount: ', gGame.markedCount)
+    console.log('totalMines: ', totalMines)
     if (gGame.revealedCount === nonMineCells && gGame.markedCount === totalMines) {
         console.log('gGame.revealedCount: ', gGame.revealedCount)
         console.log('nonMineCells: ', nonMineCells)
@@ -267,6 +291,18 @@ function minesCount() {
     if (elMines) {
         var leftMines = gLevel.MINES - gGame.markedCount
         elMines.innerText = leftMines
+    }
+}
+
+function livesCount() {
+    var elLives = document.querySelector('.lives h4')
+    console.log(elLives)
+    elLives.innerText = gLives
+
+    if (gLives <= 0 && gLives < gLevel.MINES) {
+        console.log('gLives', gLives)
+        console.log('gLevel.MINES', gLevel.MINES)
+        gameOver(false)
     }
 
 }

@@ -26,75 +26,89 @@ div h3 {
     text-align: center;
 }
 
+.lives {
+    text-align: center;
+    padding: 10px;
+    flex: 1;
+}
+
+.lives h4 {
+    color: aliceblue;
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.lives h3 {
+    color: aliceblue;
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
+}
+
 .game-status {
-    margin: 1px;
-    bottom: unset;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: 20px auto;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-items: center;
+    gap: 10px;
 }
 
 .mines {
     text-align: center;
-    width: 50px;
-    height: 75px;
     padding: 10px;
-    bottom: unset;
-    border: 2px;
-    /* border-style: solid; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
+    flex: 1;
 }
 
 .mines h4 {
-    text-align: center;
     color: aliceblue;
-    /* margin: auto; */
-    padding: 1px;
-    margin-right: 100px;
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
+.mines h3 {
+    color: aliceblue;
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
+}
 
 .time {
 
     text-align: center;
-    width: 200px;
-    height: 75px;
     padding: 10px;
-    bottom: unset;
-    border: 2px;
-    border-style: solid;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    flex: 1;
 }
 
 .time h4 {
-    text-align: center;
     color: aliceblue;
-    /* margin: auto; */
-    padding: 1px;
-    margin-right: 100px;
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.time h3 {
+    color: aliceblue;
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
 }
 
 .status {
     text-align: center;
-    width: 50px;
-    height: 75px;
     padding: 10px;
-    bottom: unset;
-    border: 2px;
-    border-style: solid;
+    flex: 1;
 
 }
 
 .status h2 {
-    font-size: 40px;
     margin: 0;
     padding: 0;
-    display: block;
-    text-align: center;
 }
 
 .board-game {
